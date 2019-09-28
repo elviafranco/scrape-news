@@ -1,0 +1,62 @@
+<body>
+
+  {{!-- ARTICLE CONTAINER --}}
+  {{!-- Div for actual background --}}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="container" style="background-color: white; text-align: center">
+        <div id="articles">
+          {{#each article}}
+          {{#if saved}}
+          <div class="card-panel">
+            <h4>{{this.title}}</h4>
+            <p>{{this.summary}}</p>
+            <a href="https://time.com{{this.link}}" class="btn btn-secondary" id="btnSignUp">Read Article</a>
+            {{!-- <a href="" data-id="{{this._id}}" class="btn btn-warning note-btn">Comment</a> --}}
+
+            <!-- Button trigger modal -->
+            <button data-id="{{this._id}}" type="button" id="commentButton" class="btn btn-warning" data-toggle="modal" data-target="#commentModal">
+              Comment
+            </button>
+            <br>
+            <hr>
+            {{/if}}
+            {{/each}}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="commentModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+       
+          
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="comment-input" class="sr-only">Enter Comment Here</label>
+          <textarea class="form-control" id="comment-input" rows="3" placeholder="New Comment"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveComment">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

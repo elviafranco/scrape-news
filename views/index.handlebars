@@ -1,0 +1,23 @@
+<body> 
+
+{{!-- ARTICLE CONTAINER --}}
+{{!-- Div for actual background --}}
+<div class="row">
+<div class="col-sm-12">
+<div class="container" style="background-color: white; text-align: center"> 
+<div id="articles"> 
+{{#each article}}
+<div class="card-panel">
+  <h4>{{this.title}}</h4>
+  <p>{{this.summary}}</p>
+  <a href="https://time.com{{this.link}}" class="btn btn-secondary" id="btnSignUp">Read Article</a>
+  <a href="" data-id="{{this._id}}" class="btn btn-warning" id="btnSave">Save Article</a>
+</div><hr>
+{{/each}}
+</div>
+</div>
+</div>
+
+</div>
+
+</body>
