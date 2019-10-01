@@ -1,86 +1,72 @@
-$(document).ready(function() {
+// $(document).ready(function() {
 
-  // STEP ONE : SAVE ARTICLE ==============================
-  // When you click the savenote button
-$(document).on("click", "#btnSave", function() {
-  console.log("button clicked!")
-    // Grab the id associated with the article from the submit button
-    const thisId = $(this).attr("data-id");
-    // var saved = {
-    //   saved: true
-    // };
-    console.log(thisId);
-  
-    // Run a POST request to change the note, using what's entered in the inputs
-    $.ajax({
-      method: "POST",
-      url: "/articles/save/" + thisId,
-      // data: saved
-    })
-      // With that done
-      .then(function(data) {
-        // Log the response
-        window.location = "/"
-        console.log(data);
-      });
+// STEP ONE : SAVE ARTICLE ==============================
+$(document).on("click", "#btnSave", function () {
+  const thisId = $(this).attr("data-id");
+  $.ajax({
+    method: "POST",
+    url: "/articles/save/" + thisId,
+  }).then(function (data) {
+    window.location = "/"
+  });
 });
 
 // STEP TWO: OPEN COMMMENT MODAL==============================
-// populating notes
-$(document).on("click", "#commentButton", function() {
+$(document).on("click", "#commentButton", function () {
   event.preventDefault();
-  // const thisId = $(this).attr("data");
   const thisId = $(this).attr("data-id");
   console.log(thisId);
   $('#save-note').attr('data-id', thisId);
-
-   $.ajax({
+  $.ajax({
     method: "GET",
     url: "/articles/" + thisId,
   })
-    // With that done
-    .then(function(data) {
-      // Log the response
+   
+    .then(function (data) {
       console.log(data);
+      $('.modal-body').empty();
+      $(data[0].comment).each(function(){
+        $('.modal-body').append
+        ($(`<li class='list-group-item'>${data[0].comment.body}<button type='button' class='btn btn-danger btn-sm float-right btn-deletenote' data-id='${data[0].comment._id}'>X</button></li>`))
+      });
 });
-
-
-
-
 });
 
 // STEP THREE: SAVE COMMENT ==========================
-// When you click the savecomment button
-// $(document).on("click", "#saveComment", function() {
-  $("#saveComment").click(function(event){
-    event.preventDefault();
-    console.log("save comment button clicked!");
-    const thisId = $(this).attr("data-id");
-    console.log(thisId);
-    const commentInput = $("#comment-input").val().trim();
-    console.log(thisId + commentInput);
-    $("#comment-input").val(" ");
-  
-     // Run a POST request to change the note, using what's entered in the inputs
-  
-     $.ajax({
-      method: "POST",
-      url: "/articles/" + thisId,
-      data: {
-        body: commentInput
-      }
-    
-    })
-      // With that done
-      .then(function(data) {
-        // Log the response
-        window.location = "/saved"
-        console.log(data);
-      });
-
+$(document).on("click", "#saveComment", function () {
+  // $("#saveComment").click(function(event){
+  event.preventDefault();
+  const thisId = $("#commentButton").attr("data-id");
+  console.log(thisId);
+  const commentInput = $("#comment-input").val().trim();
+  $("#comment-input").val(" ");
+  $.ajax({
+    method: "POST",
+    url: "/comment/" + thisId,
+    data: {
+      body: commentInput
+    }
   })
- 
+    .then(function (data) {
+      window.location = "/saved"
+    });
+});
+
+// STEP FOUR: DELETE COMMENT ==========================
+$(document).on("click", ".btn-deletenote", function () {
+  event.preventDefault();
+  console.log($(this).attr("data-id"))
+  const thisId = $(this).attr("data-id");
+  console.log(thisId);
+  $.ajax({
+    method: "DELETE",
+    url: "/comment/" + thisId,
+  }).then(function (data) {
+  $('#commentModal').modal('toggle');
+});
 });
 
 
 
+
+// });

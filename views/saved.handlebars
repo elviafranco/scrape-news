@@ -15,7 +15,8 @@
             {{!-- <a href="" data-id="{{this._id}}" class="btn btn-warning note-btn">Comment</a> --}}
 
             <!-- Button trigger modal -->
-            <button data-id="{{this._id}}" type="button" id="commentButton" class="btn btn-warning" data-toggle="modal" data-target="#commentModal">
+            <button data-id="{{this._id}}" type="button" id="commentButton" class="btn btn-warning" data-toggle="modal"
+              data-target="#commentModal">
               Comment
             </button>
             <br>
@@ -24,6 +25,7 @@
             {{/each}}
 
           </div>
+
         </div>
 
       </div>
@@ -32,7 +34,7 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="commentModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -42,10 +44,11 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
-       
-          
+      
         </div>
+
         <br>
         <div class="form-group">
           <label for="comment-input" class="sr-only">Enter Comment Here</label>
@@ -53,7 +56,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveComment">Save changes</button>
+          <button type="button" data-id="{{this._id}}" class="btn btn-primary" id="saveComment">Save changes</button>
         </div>
       </div>
     </div>
