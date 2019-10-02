@@ -8,7 +8,7 @@ const cheerio = require("cheerio");
 // Require all models
 const db = require("./models");
 
-const PORT = 8667;
+const PORT = 3000;
 
 // Initialize Express
 const app = express();
