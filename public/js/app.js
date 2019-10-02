@@ -25,9 +25,9 @@ $(document).on("click", "#commentButton", function () {
     .then(function (data) {
       console.log(data);
       $('.modal-body').empty();
-      $(data[0].comment).each(function(){
+      $(data[0].comment).each(function(index){
         $('.modal-body').append
-        ($(`<li class='list-group-item'>${data[0].comment.body}<button type='button' class='btn btn-danger btn-sm float-right btn-deletenote' data-id='${data[0].comment._id}'>X</button></li>`))
+        ($(`<li class='list-group-item'>${data[0].comment[index].body}<button type='button' class='btn btn-danger btn-sm float-right btn-deletenote' data-id='${data[0].comment._id}'>X</button></li>`))
       });
 });
 });

@@ -149,6 +149,7 @@ app.get("/articles/:id", function(req, res) {
       model: 'Comment'
   })
     .then(function(dbArticle) {
+      console.log(dbArticle);
       res.json(dbArticle);
     })
     .catch(function(err) {  
